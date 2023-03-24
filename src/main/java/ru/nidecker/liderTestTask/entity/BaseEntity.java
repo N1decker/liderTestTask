@@ -27,7 +27,7 @@ public abstract class BaseEntity {
     private String name;
     @Past
     @NotNull
-    private LocalDate initialDate;
+    private LocalDate date;
 
     @Override
     public boolean equals(Object o) {

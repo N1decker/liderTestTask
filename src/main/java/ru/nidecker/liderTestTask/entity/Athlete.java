@@ -1,12 +1,10 @@
 package ru.nidecker.liderTestTask.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -15,14 +13,17 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Athlete extends BaseEntity {
 
     @NotBlank
     private String lastName;
     private String patronymic;
 
+    @NonNull
     @ManyToOne
+    @JsonIgnore
     private Team team;
 
     private String position;

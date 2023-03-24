@@ -3,10 +3,7 @@ package ru.nidecker.liderTestTask.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.List;
@@ -16,13 +13,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Team extends BaseEntity {
 
     @NotBlank
     private String typeOfSport;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true, mappedBy = "team")
     @ToString.Exclude
     private List<Athlete> athletes;
 
