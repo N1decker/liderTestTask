@@ -26,8 +26,9 @@ public class Athlete extends BaseEntity {
     private String patronymic;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     private Team team;
 
     private String position;
