@@ -16,6 +16,10 @@ public class TeamService {
 
     private final TeamRepository teamRepository;
 
+    public Team findByNameIgnoreCase(String name) {
+        return teamRepository.findByNameEqualsIgnoreCase(name);
+    }
+
     public List<Team> findAll() {
         return teamRepository.findAll();
     }

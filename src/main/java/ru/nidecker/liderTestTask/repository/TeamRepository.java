@@ -12,4 +12,5 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     List<Team> findAllByDateGreaterThanEqualAndDateLessThanEqual(LocalDate dateFrom, LocalDate dateTo);
 
+    Team findByNameEqualsIgnoreCase(String name);
 }

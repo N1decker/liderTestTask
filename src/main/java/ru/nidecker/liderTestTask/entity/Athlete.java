@@ -3,9 +3,12 @@ package ru.nidecker.liderTestTask.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +20,7 @@ import java.util.Objects;
 public class Athlete extends BaseEntity {
 
     @Id
-//    @SequenceGenerator(name = "athlete_seq", sequenceName = "athlete_id_seq", initialValue = 22, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "athlete_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -32,6 +34,14 @@ public class Athlete extends BaseEntity {
     private Team team;
 
     private String position;
+
+    public Athlete(@NotBlank String name, @Past @NotNull LocalDate date, String lastName, String patronymic, @NonNull Team team, String position) {
+        super(name, date);
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.team = team;
+        this.position = position;
+    }
 
     @Override
     public boolean equals(Object o) {
