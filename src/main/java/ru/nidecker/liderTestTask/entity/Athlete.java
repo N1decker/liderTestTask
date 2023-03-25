@@ -1,8 +1,7 @@
 package ru.nidecker.liderTestTask.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -16,6 +15,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Athlete extends BaseEntity {
+
+    @Id
+//    @SequenceGenerator(name = "athlete_seq", sequenceName = "athlete_id_seq", initialValue = 22, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "athlete_id_seq")
+    private Long id;
 
     @NotBlank
     private String lastName;
@@ -33,7 +37,7 @@ public class Athlete extends BaseEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Athlete athlete = (Athlete) o;
-        return getId() != null && Objects.equals(getId(), athlete.getId());
+        return id != null && Objects.equals(id, athlete.id);
     }
 
     @Override
