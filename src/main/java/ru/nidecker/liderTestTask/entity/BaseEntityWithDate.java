@@ -2,7 +2,6 @@ package ru.nidecker.liderTestTask.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -17,7 +16,6 @@ import java.util.Objects;
 @AllArgsConstructor
 public abstract class BaseEntityWithDate extends BaseEntity {
 
-    @Past
     @NotNull
     private LocalDate date;
 
