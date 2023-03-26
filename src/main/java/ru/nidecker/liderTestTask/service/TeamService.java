@@ -81,4 +81,9 @@ public class TeamService {
 
         return teamRepository.save(team);
     }
+
+    @Transactional
+    public void deleteById(long id) {
+        teamRepository.deleteById(id);
+    }
 }

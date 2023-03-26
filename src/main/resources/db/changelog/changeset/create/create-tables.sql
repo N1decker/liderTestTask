@@ -23,6 +23,6 @@ create table athlete
     patronymic varchar(50),
     position   varchar(50) not null,
     team_id    int8        not null,
-    constraint FK_athlete_team foreign key (team_id) references team,
+    constraint FK_athlete_team foreign key (team_id) references team on delete cascade ,
     constraint unique_name_last_name_position_team_id unique (name, last_name, patronymic, date, position, team_id)
 );

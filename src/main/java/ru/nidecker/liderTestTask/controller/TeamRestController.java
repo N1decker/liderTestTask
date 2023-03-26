@@ -58,4 +58,9 @@ public class TeamRestController {
                        @RequestBody TeamDto dto) {
         return teamService.update(id, dto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable long id) {
+        teamService.deleteById(id);
+    }
 }
