@@ -1,7 +1,6 @@
 package ru.nidecker.liderTestTask.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +16,8 @@ public class TeamDto {
     private String name;
 
     @NotNull
-    private String typeOfSport;
+    private String sportTypeName;
 
-    @Past
     @NotNull
     private LocalDate date;
 }

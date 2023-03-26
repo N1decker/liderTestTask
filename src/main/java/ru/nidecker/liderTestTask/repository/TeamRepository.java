@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
 
-    List<Team> findAllByTypeOfSportEqualsIgnoreCase(String typeOfSport);
+    List<Team> findAllBySportTypeNameEqualsIgnoreCase(String sportTypeName);
 
     List<Team> findAllByDateGreaterThanEqualAndDateLessThanEqual(LocalDate dateFrom, LocalDate dateTo);
 

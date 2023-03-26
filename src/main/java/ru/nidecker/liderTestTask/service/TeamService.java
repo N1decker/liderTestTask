@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nidecker.liderTestTask.dto.TeamDto;
+import ru.nidecker.liderTestTask.entity.SportType;
 import ru.nidecker.liderTestTask.entity.Team;
 import ru.nidecker.liderTestTask.repository.TeamRepository;
 
@@ -14,12 +15,14 @@ import java.util.Optional;
 
 import static ru.nidecker.liderTestTask.util.PrepareTeamTeamDto.teamDtoToTeam;
 
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final SportTypeService sportTypeService;
 
     public Optional<Team> findByNameIgnoreCase(String name) {
         return teamRepository.findByNameEqualsIgnoreCase(name);
@@ -30,7 +33,7 @@ public class TeamService {
     }
 
     public List<Team> findAllByTypeOfSport(String typeOfSport) {
-        return teamRepository.findAllByTypeOfSportEqualsIgnoreCase(typeOfSport);
+        return teamRepository.findAllBySportTypeNameEqualsIgnoreCase(typeOfSport);
     }
 
     public List<Team> findAllByDateFromAndDateTo(LocalDate dateFrom, LocalDate dateTo) {
@@ -39,8 +42,14 @@ public class TeamService {
 
     @Transactional
     public Team create(TeamDto dto) {
-        findByNameIgnoreCase(dto.getName()).ifPresent(team -> {throw new EntityExistsException("team with name " + dto.getName() + " already exists");});
+        SportType sportType = sportTypeService.findByNameIgnoreCase(dto.getSportTypeName());
+        findByNameIgnoreCase(dto.getName()).ifPresent(team -> {
+            throw new EntityExistsException("team with name '" + dto.getName() + "' already exists");
+        });
 
-        return teamRepository.save(teamDtoToTeam(dto));
+        Team team = teamDtoToTeam(dto);
+        team.setSportType(sportType);
+
+        return teamRepository.save(team);
     }
 }

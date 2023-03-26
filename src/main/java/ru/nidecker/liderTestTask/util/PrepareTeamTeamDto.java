@@ -9,7 +9,6 @@ public class PrepareTeamTeamDto {
         Team team = new Team();
         team.setName(dto.getName());
         team.setDate(dto.getDate());
-        team.setTypeOfSport(dto.getTypeOfSport());
 
         return team;
     }
@@ -18,7 +17,6 @@ public class PrepareTeamTeamDto {
         TeamDto dto = new TeamDto();
         dto.setName(team.getName());
         dto.setDate(team.getDate());
-        dto.setTypeOfSport(team.getTypeOfSport());
 
         return dto;
     }
