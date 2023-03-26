@@ -4,18 +4,12 @@ import ru.nidecker.liderTestTask.dto.TeamDto;
 import ru.nidecker.liderTestTask.entity.SportType;
 import ru.nidecker.liderTestTask.entity.Team;
 
-import java.time.LocalDate;
-
 public class PrepareTeamTeamDto {
 
     public static Team teamDtoToTeam(TeamDto dto) {
         Team team = new Team();
         team.setName(dto.getName());
-        if (dto.getDate().isBefore(LocalDate.now())) {
-            team.setDate(dto.getDate());
-        } else {
-            throw new IllegalArgumentException("date should be before today");
-        }
+        team.setDate(dto.getDate());
 
         return team;
     }
