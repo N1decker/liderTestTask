@@ -38,4 +38,9 @@ public class AthleteRestController {
                           @RequestBody AthleteDto dto) {
         return athleteService.update(id, dto);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
+        athleteService.deleteById(id);
+    }
 }

@@ -91,4 +91,9 @@ public class AthleteService {
 
         return athleteDtoToAthlete(dto, team);
     }
+
+    @Transactional
+    public void deleteById(long id) {
+        athleteRepository.deleteById(id);
+    }
 }
