@@ -5,6 +5,7 @@ import ru.nidecker.liderTestTask.entity.Team;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
 
@@ -12,5 +13,5 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     List<Team> findAllByDateGreaterThanEqualAndDateLessThanEqual(LocalDate dateFrom, LocalDate dateTo);
 
-    Team findByNameEqualsIgnoreCase(String name);
+    Optional<Team> findByNameEqualsIgnoreCase(String name);
 }

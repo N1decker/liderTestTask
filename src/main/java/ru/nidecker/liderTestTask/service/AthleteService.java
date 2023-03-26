@@ -19,17 +19,19 @@ public class AthleteService {
         return athleteRepository.findAllByTeamNameEqualsIgnoreCase(teamName);
     }
 
-    public List<Athlete> findALlByPosition(String position) {
+    public List<Athlete> findAllByPosition(String position) {
         return athleteRepository.findAllByPositionEqualsIgnoreCase(position);
     }
 
     public List<Athlete> findAllByTeamNameOrPosition(String teamName, String position) {
-        if (teamName != null && position != null) {
+        if (teamName == null && position == null) {
+            return athleteRepository.findAll();
+        } else if (teamName != null && position != null) {
             return athleteRepository.findAllByTeamNameEqualsIgnoreCaseAndPositionEqualsIgnoreCase(teamName, position);
         } else if (position == null) {
             return findAllByTeamName(teamName);
         } else {
-            return findALlByPosition(position);
+            return findAllByPosition(position);
         }
     }
 }

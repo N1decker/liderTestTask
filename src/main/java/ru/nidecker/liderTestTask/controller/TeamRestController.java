@@ -3,10 +3,9 @@ package ru.nidecker.liderTestTask.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import ru.nidecker.liderTestTask.dto.TeamDto;
 import ru.nidecker.liderTestTask.entity.Team;
 import ru.nidecker.liderTestTask.service.TeamService;
 
@@ -15,10 +14,10 @@ import java.util.List;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
-@RestController
-@RequestMapping("api/teams")
-@RequiredArgsConstructor
 @Slf4j
+@RestController
+@RequestMapping(value = "api/teams", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor
 public class TeamRestController {
 
     private final TeamService teamService;
@@ -41,6 +40,8 @@ public class TeamRestController {
         return teamService.findAllByDateFromAndDateTo(dateFrom, dateTo);
     }
 
-
-
+    @PostMapping
+    public Team create(@RequestBody TeamDto dto) {
+        return teamService.create(dto);
+    }
 }
