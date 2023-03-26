@@ -1,7 +1,9 @@
 package ru.nidecker.liderTestTask.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -17,11 +19,7 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Athlete extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Athlete extends BaseEntityWithDate {
 
     @NotBlank
     private String lastName;
@@ -48,7 +46,7 @@ public class Athlete extends BaseEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Athlete athlete = (Athlete) o;
-        return id != null && Objects.equals(id, athlete.id);
+        return getId() != null && Objects.equals(getId(), athlete.getId());
     }
 
     @Override
