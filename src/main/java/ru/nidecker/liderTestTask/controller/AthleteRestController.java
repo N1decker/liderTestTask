@@ -27,4 +27,15 @@ public class AthleteRestController {
     public Athlete create(@RequestBody AthleteDto dto) {
         return athleteService.create(dto);
     }
+
+    @GetMapping("/{id}")
+    public Athlete findById(@PathVariable long id) {
+        return athleteService.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Athlete update(@PathVariable long id,
+                          @RequestBody AthleteDto dto) {
+        return athleteService.update(id, dto);
+    }
 }
