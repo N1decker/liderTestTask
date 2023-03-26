@@ -1,6 +1,7 @@
 package ru.nidecker.liderTestTask.service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,14 +43,14 @@ public class TeamService {
 
     @Transactional
     public Team create(TeamDto dto) {
-        SportType sportType = sportTypeService.findByNameIgnoreCase(dto.getSportTypeName());
-        findByNameIgnoreCase(dto.getName()).ifPresent(team -> {
-            throw new EntityExistsException("team with name '" + dto.getName() + "' already exists");
+        SportType sportType = sportTypeService.findByNameIgnoreCase(dto.getSportTypeName()).orElseThrow(() -> {
+            throw new EntityNotFoundException("sport '" + dto.getSportTypeName() + "' not found");
         });
 
-        Team team = teamDtoToTeam(dto);
-        team.setSportType(sportType);
+        findByNameIgnoreCase(dto.getName()).ifPresent(team -> {
+            throw new EntityExistsException("team '" + dto.getName() + "' already exists");
+        });
 
-        return teamRepository.save(team);
+        return teamRepository.save(teamDtoToTeam(dto, sportType));
     }
 }

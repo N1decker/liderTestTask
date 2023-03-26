@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 public class GlobalRestExceptionAdvice {
 
-    @ExceptionHandler({EntityNotFoundException.class, EntityExistsException.class})
+    @ExceptionHandler({EntityNotFoundException.class, EntityExistsException.class, IllegalArgumentException.class})
     public ErrorResponse badRequestException(RuntimeException e) {
         return ErrorResponse.create(e, HttpStatus.BAD_REQUEST, e.getMessage());
     }
