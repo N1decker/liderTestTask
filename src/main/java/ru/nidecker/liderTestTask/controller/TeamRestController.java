@@ -3,9 +3,11 @@ package ru.nidecker.liderTestTask.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.nidecker.liderTestTask.dto.TeamDto;
+import ru.nidecker.liderTestTask.dto.TeamDtoWithSportType;
 import ru.nidecker.liderTestTask.entity.Team;
 import ru.nidecker.liderTestTask.service.TeamService;
 
@@ -29,7 +31,7 @@ public class TeamRestController {
             return teamService.findAll();
         } else {
             log.info("find teams by type of sport = {}", typeOfSport);
-            return teamService.findAllByTypeOfSport(typeOfSport);
+            return teamService.findAllBySportName(typeOfSport);
         }
     }
 
@@ -41,7 +43,19 @@ public class TeamRestController {
     }
 
     @PostMapping
-    public Team create(@RequestBody TeamDto dto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Team create(@RequestBody TeamDtoWithSportType dto) {
         return teamService.create(dto);
+    }
+
+    @GetMapping("/{id}")
+    public Team getById(@PathVariable long id) {
+        return teamService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Team update(@PathVariable long id,
+                       @RequestBody TeamDto dto) {
+        return teamService.update(id, dto);
     }
 }
