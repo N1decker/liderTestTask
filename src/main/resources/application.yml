@@ -2,6 +2,7 @@ spring:
   datasource:
     username: user
     password: password
+#    url: jdbc:postgresql://postgresql:5432/lider_test_task
     url: jdbc:postgresql://localhost:5432/lider_test_task
     driver-class-name: org.postgresql.Driver
   jpa:
