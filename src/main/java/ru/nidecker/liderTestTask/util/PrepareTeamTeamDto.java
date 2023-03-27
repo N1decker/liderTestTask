@@ -21,12 +21,4 @@ public class PrepareTeamTeamDto {
 
         return team;
     }
-
-    public static TeamDtoWithSportType teamToTeamDto(Team team) {
-        TeamDtoWithSportType dto = new TeamDtoWithSportType();
-        dto.setName(team.getName());
-        dto.setDate(team.getDate());
-
-        return dto;
-    }
 }

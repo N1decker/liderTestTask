@@ -30,7 +30,7 @@ public class AthleteRestController {
 
     @GetMapping("/{id}")
     public Athlete findById(@PathVariable long id) {
-        return athleteService.getById(id);
+        return athleteService.findById(id);
     }
 
     @PutMapping("/{id}")

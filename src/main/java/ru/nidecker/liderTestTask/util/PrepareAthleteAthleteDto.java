@@ -14,7 +14,7 @@ public class PrepareAthleteAthleteDto {
         if (dto.getDate().isBefore(LocalDate.now())) {
             athlete.setDate(dto.getDate());
         } else {
-            throw new IllegalArgumentException("date should be before today");
+            throw new IllegalArgumentException("date must be at least until today");
         }
         athlete.setName(dto.getName());
         athlete.setLastName(dto.getLastName());
@@ -29,16 +29,5 @@ public class PrepareAthleteAthleteDto {
         athlete.setTeam(team);
 
         return athlete;
-    }
-
-    public static AthleteDto athleteToAthleteDto(Athlete athlete) {
-        AthleteDto dto = new AthleteDto();
-        dto.setDate(athlete.getDate());
-        dto.setName(athlete.getName());
-        dto.setLastName(athlete.getLastName());
-        dto.setPatronymic(athlete.getPatronymic());
-        dto.setPosition(athlete.getPosition());
-
-        return dto;
     }
 }

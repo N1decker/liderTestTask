@@ -63,17 +63,23 @@ public class AthleteService {
     @Modifying
     public Athlete update(long id, AthleteDto dto) {
         Athlete athlete = returnAthleteIfSportTypeAndTeamExists(dto);
-        athlete.setId(getById(id).getId());
+        athlete.setId(findById(id).getId());
         log.info("entity {} updated", athlete);
 
         return athleteRepository.save(athlete);
     }
 
-    public Athlete getById(long id) {
+    public Athlete findById(long id) {
         log.info("find by id {}", id);
         return athleteRepository.findById(id).orElseThrow(() -> {
             throw new EntityNotFoundException("athlete by id " + id + " not found");
         });
+    }
+
+    @Transactional
+    public void deleteById(long id) {
+        log.info("athlete deleted by id {}", id);
+        athleteRepository.deleteById(id);
     }
 
     private Athlete returnAthleteIfSportTypeAndTeamExists(AthleteDto dto) {
@@ -90,10 +96,5 @@ public class AthleteService {
         }
 
         return athleteDtoToAthlete(dto, team);
-    }
-
-    @Transactional
-    public void deleteById(long id) {
-        athleteRepository.deleteById(id);
     }
 }
